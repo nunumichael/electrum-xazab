@@ -1,0 +1,107 @@
+Source: electrum-xazab
+Section: utils
+Priority: optional
+Maintainer: Andriy Khavryuchenko <xazabevo@khavr.com>
+Build-Depends:
+ debhelper (>= 9),
+ dh-python,
+ dh-virtualenv (>= 1.2.2),
+ python3-all (>= 3.5.36~),
+ python3-dev (>= 3.5.36~),
+ python3-pip,
+ python3-virtualenv,
+ python3-setuptools,
+ cython3,
+ libusb-1.0-0-dev,
+ libudev-dev,
+ libgmp-dev,
+ libsecp256k1-0,
+ electrum-xazab-pypi-bdeps (>= 4.0.4.0~),
+ electrum-xazab-pypi-bdeps-updates (>= 4.1.1.0~)
+Standards-Version: 4.1.3
+Homepage: http://electrum.xazab.xyz/
+X-Python3-Version: >= 3.6
+
+Package: electrum-xazab-venv
+Architecture: amd64
+Depends:
+ dpkg (>= 1.16.1),
+ libsecp256k1-0,
+ libusb-1.0-0,
+ libudev1,
+ python3 (>= 3.5.36~),
+ ${misc:Pre-Depends}
+Description: Easy to use Xazab client - Python venv module
+ This package provides a lightweight Xazab client which protects
+ you from losing your Xazab coins in a backup mistake or computer
+ failure. Also, Xazab Electrum does not require waiting time because it does
+ not download the Xazab blockchain.
+ .
+ This package provides the "electrum_xazab" Python 3 module which can be used
+ to access a Xazab wallet from Python programs.
+
+Package: electrum-xazab
+Architecture: amd64
+Section: python
+Depends:
+ electrum-xazab-venv (= ${binary:Version})
+Replaces: xazab-electrum (<= ${binary:Version})
+Breaks: xazab-electrum (<= ${binary:Version})
+Description: Easy to use Xazab client
+ This package provides a lightweight Xazab client which protects
+ you from losing your Xazab coins in a backup mistake or computer
+ failure. Also, Xazab Electrum does not require waiting time because it does
+ not download the Xazab blockchain.
+ .
+ Features of Xazab Electrum:
+ .
+   * Instant on: Your client does not download the blockchain. It uses a
+     network of specialized servers that index the blockchain.
+   * Forgiving: Your wallet can be recovered from a secret seed.
+   * Safe: Your seed and private keys are encrypted on your hard drive.
+     They are never sent to the servers.
+   * Low trust: Information received from the servers is verified using
+     SPV. Servers are authenticated using SSL.
+   * No downtimes: Your client is not tied to a particular server; it
+     will switch instantly if your server is down.
+   * Ubiquitous: You can use the same wallet on different computers, they
+     will synchronize automatically.
+   * Cold Storage: Sign transactions from a computer that is always
+     offline. Broadcast them using a machine that does not have your keys.
+   * Reachable: You can export your private keys into other Xazab
+     clients.
+   * Established: Xazab Electrum is open source and was first released in
+     November 2011.
+
+Package: xazab-electrum
+Architecture: amd64
+Section: python
+Depends:
+ electrum-xazab-venv (= ${binary:Version})
+Replaces: electrum-xazab (<= ${binary:Version})
+Breaks: electrum-xazab (<= ${binary:Version})
+Description: Easy to use Xazab client
+ This package provides a lightweight Xazab client which protects
+ you from losing your Xazab coins in a backup mistake or computer
+ failure. Also, Xazab Electrum does not require waiting time because it does
+ not download the Xazab blockchain.
+ .
+ Features of Xazab Electrum:
+ .
+   * Instant on: Your client does not download the blockchain. It uses a
+     network of specialized servers that index the blockchain.
+   * Forgiving: Your wallet can be recovered from a secret seed.
+   * Safe: Your seed and private keys are encrypted on your hard drive.
+     They are never sent to the servers.
+   * Low trust: Information received from the servers is verified using
+     SPV. Servers are authenticated using SSL.
+   * No downtimes: Your client is not tied to a particular server; it
+     will switch instantly if your server is down.
+   * Ubiquitous: You can use the same wallet on different computers, they
+     will synchronize automatically.
+   * Cold Storage: Sign transactions from a computer that is always
+     offline. Broadcast them using a machine that does not have your keys.
+   * Reachable: You can export your private keys into other Xazab
+     clients.
+   * Established: Xazab Electrum is open source and was first released in
+     November 2011.

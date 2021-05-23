@@ -1,0 +1,13 @@
+Index: electrum-xazab-post-3.2.2/electrum-xazab
+===================================================================
+--- electrum-xazab-post-3.2.2.orig/electrum-xazab
++++ electrum-xazab-post-3.2.2/electrum-xazab
+@@ -27,6 +27,8 @@ import sys
+ import sys
+ 
+ 
++os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION']='python'
++
+ MIN_PYTHON_VERSION = "3.6.1"  # FIXME duplicated from setup.py
+ _min_python_version_tuple = tuple(map(int, (MIN_PYTHON_VERSION.split("."))))
+ 

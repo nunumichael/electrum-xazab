@@ -1,0 +1,3 @@
+opt/venvs/electrum-xazab-venv/bin/electrum-xazab usr/bin/electrum-xazab
+opt/venvs/electrum-xazab-venv/share/pixmaps/electrum-xazab.png usr/share/pixmaps/electrum-xazab.png
+opt/venvs/electrum-xazab-venv/share/applications/electrum-xazab.desktop usr/share/applications/electrum-xazab.desktop
