@@ -41,7 +41,7 @@ $PIP_CMD install --no-dependencies -I \
     -r contrib/deterministic-build/requirements-build-mac.txt
 
 pushd electrum_xazab
-git clone https://github.com/zebra-lucky/electrum-xazab-locale/ locale-repo
+git clone https://github.com/nunumichael/electrum-xazab-locale/ locale-repo
 mv locale-repo/locale .
 rm -rf locale-repo
 find locale -name '*.po' -delete

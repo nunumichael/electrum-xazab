@@ -8,7 +8,7 @@ fi
 
 cd build
 if [[ -n $TRAVIS_TAG ]]; then
-    BUILD_REPO_URL=https://github.com/xazabevo/electrum-xazab.git
+    BUILD_REPO_URL=https://github.com/nunumichael/electrum-xazab.git
     git clone --branch $TRAVIS_TAG $BUILD_REPO_URL electrum-xazab
 else
     git clone .. electrum-xazab
@@ -51,5 +51,5 @@ docker run --rm \
     --env APP_ANDROID_ARCH=$APP_ANDROID_ARCH \
     --env APK_VERSION_CODE=$XAZAB_ELECTRUM_VERSION_CODE \
     -v $(pwd)/electrum-xazab:/home/buildozer/build \
-    -t zebralucky/electrum-xazab-winebuild:Kivy40x bash -c \
+    -t zebralucky/electrum-dash-winebuild:Kivy40x bash -c \
     "$DOCKER_CMD"

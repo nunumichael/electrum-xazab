@@ -11,7 +11,7 @@
   !define PRODUCT_NAME_NO_SPACE "Xazab-Electrum"
   !define PREV_PROD_NAME "Electrum-XAZAB"
   !define PREV_PROD_NAME2 "Xazab-Electrum"
-  !define PRODUCT_WEB_SITE "https://github.com/xazabevo/electrum-xazab"
+  !define PRODUCT_WEB_SITE "https://github.com/nunumichael/electrum-xazab"
   !define PRODUCT_PUBLISHER "Electrum Technologies GmbH"
   !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
   !define PREV_PROD_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PREV_PROD_NAME}"

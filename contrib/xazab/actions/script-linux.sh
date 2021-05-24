@@ -5,7 +5,7 @@ mkdir -p dist
 docker run --rm \
     -v $(pwd):/opt \
     -w /opt/ \
-    -t zebralucky/electrum-xazab-winebuild:Linux40x \
+    -t zebralucky/electrum-dash-winebuild:Linux40x \
     /opt/contrib/build-linux/sdist/build.sh
 
 
@@ -16,7 +16,7 @@ sudo find . -name '*.pot' -delete
 docker run --rm \
     -v $(pwd):/opt \
     -w /opt/contrib/build-linux/appimage \
-    -t zebralucky/electrum-xazab-winebuild:AppImage40x ./build.sh
+    -t xazab/electrum-xazab-winebuild:AppImage40x ./build.sh
 
 
 BUILD_DIR=/root/build
@@ -69,7 +69,7 @@ docker run --rm \
     -v $(pwd):$BUILD_DIR \
     -v $(pwd):$WINEPREFIX/drive_c/electrum-xazab \
     -w $BUILD_DIR \
-    -t zebralucky/electrum-xazab-winebuild:Wine40x \
+    -t zebralucky/electrum-dash-winebuild:Wine40x \
     $BUILD_DIR/contrib/build-wine/build.sh
 
 
@@ -116,5 +116,5 @@ docker run --rm \
     -v $(pwd):$BUILD_DIR \
     -v $(pwd):$WINEPREFIX/drive_c/electrum-xazab \
     -w $BUILD_DIR \
-    -t zebralucky/electrum-xazab-winebuild:Wine40x \
+    -t zebralucky/electrum-dash-winebuild:Wine40x \
     $BUILD_DIR/contrib/build-wine/build.sh

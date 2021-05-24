@@ -3,7 +3,7 @@ set -ev
 
 cd build
 if [[ -n $TRAVIS_TAG ]]; then
-    BUILD_REPO_URL=https://github.com/xazabevo/electrum-xazab.git
+    BUILD_REPO_URL=https://github.com/nunumichael/electrum-xazab.git
     git clone --branch $TRAVIS_TAG $BUILD_REPO_URL electrum-xazab
 else
     git clone .. electrum-xazab
@@ -14,7 +14,7 @@ mkdir -p electrum-xazab/dist
 docker run --rm \
     -v $(pwd):/opt \
     -w /opt/electrum-xazab \
-    -t zebralucky/electrum-xazab-winebuild:Linux40x \
+    -t zebralucky/electrum-dash-winebuild:Linux40x \
     /opt/electrum-xazab/contrib/build-linux/sdist/build.sh
 
 
@@ -25,7 +25,7 @@ sudo find . -name '*.pot' -delete
 docker run --rm \
     -v $(pwd):/opt \
     -w /opt/electrum-xazab/contrib/build-linux/appimage \
-    -t zebralucky/electrum-xazab-winebuild:AppImage40x ./build.sh
+    -t xazab/electrum-xazab-winebuild:AppImage40x ./build.sh
 
 
 BUILD_DIR=/root/build
@@ -69,7 +69,7 @@ docker run --rm \
     -v $(pwd):$BUILD_DIR \
     -v $(pwd)/electrum-xazab/:$WINEPREFIX/drive_c/electrum-xazab \
     -w $BUILD_DIR/electrum-xazab \
-    -t zebralucky/electrum-xazab-winebuild:Wine40x \
+    -t zebralucky/electrum-dash-winebuild:Wine40x \
     $BUILD_DIR/electrum-xazab/contrib/build-wine/build.sh
 
 
@@ -106,5 +106,5 @@ docker run --rm \
     -v $(pwd):$BUILD_DIR \
     -v $(pwd)/electrum-xazab/:$WINEPREFIX/drive_c/electrum-xazab \
     -w $BUILD_DIR/electrum-xazab \
-    -t zebralucky/electrum-xazab-winebuild:Wine40x \
+    -t zebralucky/electrum-dash-winebuild:Wine40x \
     $BUILD_DIR/electrum-xazab/contrib/build-wine/build.sh
