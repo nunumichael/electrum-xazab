@@ -356,9 +356,15 @@ class XazabProRegTx(ProTxBase):
         if self.collateralOutpoint.hash_is_null:
             found_idx = -1
             for i, o in enumerate(tx.outputs()):
-                if o.value == 1000 * COIN:
-                    found_idx = i
-                    break
+                if height  < 170000:
+                   if o.value == 1000 * COIN:
+                      found_idx = i
+                      break
+                elif height >= 170000:
+                   if o.value == 15000 * COIN:
+                      found_idx = i
+                      break
+
             if found_idx >= 0:
                 self.collateralOutpoint = TxOutPoint(b'\x00'*32, found_idx)
 
