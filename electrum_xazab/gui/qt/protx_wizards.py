@@ -1042,8 +1042,12 @@ class SaveDip3WizardPage(QWizardPage):
                 return True
             gui.do_clear()
             mn = self.new_mn
-            if mn.collateral.is_null and tx_type == xazab_tx.SPEC_PRO_REG_TX:
+            if height < 170000:
+               if mn.collateral.is_null and tx_type == xazab_tx.SPEC_PRO_REG_TX:
                 gui.amount_e.setText('1000')
+            else:
+               if mn.collateral.is_null and tx_type == xazab_tx.SPEC_PRO_REG_TX:
+                gui.amount_e.setText('15000')
             mn_addrs = [mn.owner_addr, mn.voting_addr, mn.payout_address]
             for addr in manager.wallet.get_unused_addresses():
                 if addr not in mn_addrs:
@@ -1107,7 +1111,7 @@ class CollateralWizardPage(QWizardPage):
         self.frozen_cb.setChecked(False)
         self.frozen_cb.setEnabled(False)
         self.frozen_cb.stateChanged.connect(self.frozen_state_changed)
-        self.not_found = QLabel('No 1000 XAZAB outputs were found.')
+        self.not_found = QLabel('No 15000 XAZAB outputs were found.')
         self.not_found.setObjectName('err-label')
         self.not_found.hide()
 
@@ -1209,9 +1213,12 @@ class CollateralWizardPage(QWizardPage):
                                  mature_only=True, confirmed_funding_only=True)
         if not self.frozen_cb.isChecked():
             coins = [c for c in coins if not wallet.is_frozen_coin(c)]
-        coins = list(filter(lambda x: (x.value_sats() == (1000 * COIN)),
+        if height < 170000:
+           coins = list(filter(lambda x: (x.value_sats() == (1000 * COIN)),
                                        coins))
-
+        else:
+           coins = list(filter(lambda x: (x.value_sats() == (15000 * COIN)),
+                                       coins))
         if len(coins) > 0:
             self.outputs_list.add_outputs(coins)
         else:
@@ -1782,10 +1789,12 @@ class Dip3MasternodeWizard(QWizard):
             raise ValidationError('No collateral address specified')
         if not outpoint:
             raise ValidationError('No collateral outpoint specified')
-
-        if not value == 1000 * COIN or not value == c_vin.value_sats():
+        if height < 170000:
+           if not value == 1000 * COIN or not value == c_vin.value_sats():
             raise ValidationError('Wrong collateral value')
-
+        else:
+           if not value == 15000 * COIN or not value == c_vin.value_sats():
+            raise ValidationError('Wrong collateral value')
 
         if prevout_hash:
             if skip_alias:
