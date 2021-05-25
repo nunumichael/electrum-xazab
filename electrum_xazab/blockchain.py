@@ -314,14 +314,6 @@ class Blockchain(Logger):
         if constants.net.TESTNET:
             return
         height = header.get('block_height')
-        if height < POW_DGW3_HEIGHT:
-            return
-        bits = cls.target_to_bits(target)
-        if bits != header.get('bits'):
-            raise Exception("bits mismatch: %s vs %s" % (bits, header.get('bits')))
-        block_hash_as_num = int.from_bytes(bfh(_hash), byteorder='big')
-        if block_hash_as_num > target:
-            raise Exception(f"insufficient proof of work: {block_hash_as_num} vs target {target}")
 
     def verify_chunk(self, index: int, data: bytes) -> None:
         num = len(data) // HEADER_SIZE
@@ -542,57 +534,7 @@ class Blockchain(Logger):
         if chunk_headers is None:
             chunk_headers = {'empty': True}
 
-        if height >= POW_DGW3_HEIGHT:
-            return self.get_target_dgw_v3(height, chunk_headers)
-        else:
             return MAX_TARGET
-
-    def get_target_dgw_v3(self, height: int, chunk_headers: Optional[dict]) -> int:
-        if chunk_headers['empty']:
-            chunk_empty = True
-        else:
-            chunk_empty = False
-            min_height = chunk_headers['min_height']
-            max_height = chunk_headers['max_height']
-
-        count_blocks = 1
-        while count_blocks <= DGW_PAST_BLOCKS:
-            reading_h = height - count_blocks
-            reading_header = self.read_header(reading_h)
-            if (not reading_header and not chunk_empty
-                    and min_height <= reading_h <= max_height):
-                reading_header = chunk_headers[reading_h]
-            if not reading_header:
-                raise MissingHeader()
-            reading_time = reading_header.get('timestamp')
-            reading_target = self.bits_to_target(reading_header.get('bits'))
-
-            if count_blocks == 1:
-                past_target_avg = reading_target
-                last_time = reading_time
-            past_target_avg = (past_target_avg * count_blocks +
-                               reading_target) // (count_blocks + 1)
-
-            count_blocks +=1
-
-        new_target = past_target_avg
-        actual_timespan = last_time - reading_time
-        target_timespan = DGW_PAST_BLOCKS * POW_TARGET_SPACING
-
-        if actual_timespan < target_timespan // 3:
-            actual_timespan = target_timespan // 3
-        if actual_timespan > target_timespan * 3:
-            actual_timespan = target_timespan * 3
-
-        new_target *= actual_timespan
-        new_target //= target_timespan
-
-        if new_target > MAX_TARGET:
-            return MAX_TARGET
-
-        # not any target can be represented in 32 bits:
-        new_target = self.bits_to_target(self.target_to_bits(new_target))
-        return new_target
 
     @classmethod
     def bits_to_target(cls, bits: int) -> int:
