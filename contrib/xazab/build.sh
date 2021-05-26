@@ -139,12 +139,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     fi
 
     # Build testnet release apk
-    sudo rm -rf build
-    mkdir -p build && cp contrib/xazab/travis/* ./build/
-    export ELECTRUM_MAINNET=false
-    ./build/travis-build-linux-apk.sh
-    cp ${BUILD_BIN_DIR}/${APK_TNAME}-$XAZAB_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL \
-        dist/
+
 
     sudo rm -rf build
 
@@ -170,21 +165,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     fi
 
     # Sign testnet apk
-    jarsigner -verbose \
-        -tsa http://sha256timestamp.ws.symantec.com/sha256/timestamp \
-        -sigalg SHA1withRSA -digestalg SHA1 \
-        -sigfile xazab-electrum \
-        -keystore ~/.jks/keystore \
-        -storepass:env JKS_STOREPASS \
-        -keypass:env JKS_KEYPASS \
-        dist/${APK_TNAME}-$XAZAB_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL \
-        electrum.xazab.xyz
 
-    zipalign -v 4 \
-        dist/${APK_TNAME}-$XAZAB_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL \
-        dist/${TNAME}-$XAZAB_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$APK_TAIL \
-
-    rm dist/${APK_TNAME}-$XAZAB_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL
 else
     # Build macOS
     sudo rm -rf build
