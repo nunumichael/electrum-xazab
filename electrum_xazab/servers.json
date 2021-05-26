@@ -4,6 +4,11 @@
         "s": "50010",
         "version": "1.4"
     },
+    "51.161.32.104": {
+        "pruning": "-",
+        "s": "50020",
+        "version": "1.4"
+    },
     "electrum.xazab.xyz": {
         "pruning": "-",
         "s": "50020",
