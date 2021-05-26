@@ -29,7 +29,7 @@ Manual signing:
         -sigalg SHA1withRSA -digestalg SHA1 \
         -sigfile xazab-electrum \
         -keystore ~/.jks/keystore \
-        Electrum_XAZAB-3.0.6.1-release-unsigned.apk \
+        Electrum_XAZAB-4.1.2.0-release-unsigned.apk \
         electrum.xazab.xyz
 
 Zipalign from Android SDK build tools is also required (set path to bin in
@@ -48,8 +48,8 @@ settings file or with key -z). To install:
 Manual zip aligning:
 
     android-sdk-linux/build-tools/27.0.3/zipalign -v 4 \
-        Electrum_XAZAB-3.0.6.1-release-unsigned.apk \
-        Xazab-Electrum-3.0.6.1-release.apk
+        Electrum_XAZAB-4.1.2.0-release-unsigned.apk \
+        Xazab-Electrum-4.1.2.0-release.apk
 
 
 
